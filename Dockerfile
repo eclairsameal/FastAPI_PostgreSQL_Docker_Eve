@@ -1,14 +1,12 @@
-# Dockerfile
+# Use tiangolo/uvicorn-gunicorn-fastapi Docker image with Python 3.9
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements.txt to container
-COPY ./app/requirements.txt .
+# Copy requirements.txt and install dependencies
+COPY ./app/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# 安Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
+# Copy the rest of the application code to the container
 COPY ./app /app
