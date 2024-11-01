@@ -1,5 +1,8 @@
 # FastAPI_PostgreSQL_Docker_Eve
-The environment of a FastAPI docker project
+
+* The environment of a FastAPI docker project.
+
+* Example of user login.
 
 ## Environment :
 
@@ -8,9 +11,11 @@ The environment of a FastAPI docker project
 * FastAPI
 * Synchronization between container and local program
 
-## Database :
+```
+docker-compose up -d
+```
 
-### PgAdmin 4 Connecting to PostgreSQL
+## PgAdmin 4 Connecting to PostgreSQL
 
 1. Open your browser and go to http://localhost:5050
 2. Log in to PgAdmin 4 using the account and password set in docker-compose.yml (admin@example.com and admin).
@@ -20,20 +25,23 @@ The environment of a FastAPI docker project
    * Username：myuser
    * Password：mypassword
 
-### SQL : 
-```
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password_hash VARCHAR(100) NOT NULL
-);
-```
+## Test the Endpoints : 
 
-## Example Project : 
+### Using cURL
 
-```
-pip install databases asyncpg bcrypt
+register Endpoint :
+
+```bash
+curl -X POST "http://localhost:8000/register" -H "Content-Type: application/json" -d '{
+    "username": "testuser",
+    "password": "testpassword"
+}'
 ```
 
-Example of user login
-
+login Endpoint :
+```bash
+curl -X POST "http://localhost:8000/login" -H "Content-Type: application/json" -d '{
+    "username": "testuser",
+    "password": "testpassword"
+}'
+```
