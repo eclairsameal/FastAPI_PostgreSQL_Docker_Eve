@@ -25,7 +25,9 @@ services:
       - app-network
 
   fastapi:
-    image: tiangolo/uvicorn-gunicorn-fastapi:python3.9
+    build:
+      context: .
+      dockerfile: Dockerfile  # Make sure you point to the correct Dockerfile
     container_name: fastapi_app
     volumes:
       - ./app:/app
